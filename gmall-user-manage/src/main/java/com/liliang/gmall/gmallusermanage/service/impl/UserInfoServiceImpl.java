@@ -7,6 +7,7 @@ import com.liliang.gmall.gmallusermanage.mapper.UserAddressMapper;
 import com.liliang.gmall.gmallusermanage.mapper.UserInfoMapper;
 import com.liliang.gmall.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -31,15 +32,20 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public List<UserAddress> findAddressByUserId(String userId) {
-
-        System.out.println("id+++++++++++++"+userId);
+    public int findAddressByUserId(String userId) {
         UserAddress userAddress = new UserAddress();
         userAddress.setUserId(userId);
-        List<UserAddress> userAddresses = userAddressMapper.select(userAddress);
-        for (UserAddress address : userAddresses) {
-            System.out.println("address++++++++++"+address);
-        }
-        return userAddresses;
+        userAddress.setUserAddress("北京市大兴区");
+
+        int i = userAddressMapper.insertSelective(userAddress);
+        return i;
+    }
+
+    @Override
+    public int getUserAddressNumberByUserId(String userId) {
+        Example example = new Example(UserAddress.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        int i = userAddressMapper.selectCountByExample(example);
+        return i;
     }
 }
