@@ -31,8 +31,15 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserAddress findAddressByUserId(String userId) {
+    public List<UserAddress> findAddressByUserId(String userId) {
 
-        return null;
+        System.out.println("id+++++++++++++"+userId);
+        UserAddress userAddress = new UserAddress();
+        userAddress.setUserId(userId);
+        List<UserAddress> userAddresses = userAddressMapper.select(userAddress);
+        for (UserAddress address : userAddresses) {
+            System.out.println("address++++++++++"+address);
+        }
+        return userAddresses;
     }
 }

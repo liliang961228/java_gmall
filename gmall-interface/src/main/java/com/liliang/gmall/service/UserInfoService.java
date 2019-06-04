@@ -20,6 +20,6 @@ public interface UserInfoService {
      * @param userId
      * @return
      */
-    UserAddress findAddressByUserId(String userId);
+    List<UserAddress> findAddressByUserId(String userId);
 
 }
