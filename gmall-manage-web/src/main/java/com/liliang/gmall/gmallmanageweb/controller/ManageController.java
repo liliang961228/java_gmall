@@ -58,11 +58,15 @@ public class ManageController {
         return list;
     }
 
+    //http://127.0.0.1:8082/attrInfoList?catalog3Id=61
     //attrInfoList
     @RequestMapping("attrInfoList")
     @ResponseBody
     public List<BaseAttrInfo> attrInfoList(@RequestParam String catalog3Id){
-        List<BaseAttrInfo> attrList = manageService.getAttrList(catalog3Id);
+
+        //List<BaseAttrInfo> attrList = manageService.getAttrList(catalog3Id);
+
+        List<BaseAttrInfo> attrList = manageService.attrInfoListByCatalog3Id(catalog3Id);
         return attrList;
     }
 
@@ -97,6 +101,7 @@ public class ManageController {
     @RequestMapping("baseSaleAttrList")
     @ResponseBody
     public List<BaseSaleAttr> getBaseSaleAttrList(){
+
         return manageService.getBaseSaleAttrList();
     }
 
@@ -104,6 +109,7 @@ public class ManageController {
     @RequestMapping("saveSpuInfo")
     @ResponseBody
     public String saveSpuInfo(@RequestBody SpuInfo spuInfo){
+
         return manageService.saveSpuInfo(spuInfo);
     }
 
