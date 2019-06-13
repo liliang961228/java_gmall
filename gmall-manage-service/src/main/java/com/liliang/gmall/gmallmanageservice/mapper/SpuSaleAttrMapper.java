@@ -13,4 +13,12 @@ public interface SpuSaleAttrMapper extends Mapper<SpuSaleAttr> {
      * @return
      */
     List<SpuSaleAttr> spuSaleAttrListByspuId(String spuId);
+
+    /**
+     * 根据skuId ，spuId 查询销售属性
+     * @param spuId
+     * @param skuId
+     * @return
+     */
+    List<SpuSaleAttr> selectSpuSaleAttrListCheckBySkuId(String spuId, String skuId);
 }

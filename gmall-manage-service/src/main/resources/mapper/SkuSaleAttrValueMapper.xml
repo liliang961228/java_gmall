@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liliang.gmall.gmallmanageservice.mapper.SkuSaleAttrValueMapper">
+    <resultMap id="skuSaleAttrValueMapper" type="com.liliang.gmall.bean.SkuSaleAttrValue" autoMapping="true">
+        <id property="id" column="id"></id>
+    </resultMap>
+
+    <select id="selectSkuSaleAttrValueListBySpuId" resultMap="skuSaleAttrValueMapper">
+      select
+          ssav.sale_attr_value_id,
+          ssav.sku_id,
+          ssav.sale_attr_value_name
+        from sku_sale_attr_value ssav,sku_info si
+        where si.id=ssav.sku_id
+              and  si.spu_id=#{spuId}
+        order by ssav.sku_id,ssav.sale_attr_value_id;
+    </select>
+</mapper>

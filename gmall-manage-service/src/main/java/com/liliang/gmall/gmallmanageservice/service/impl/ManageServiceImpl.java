@@ -10,6 +10,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
+
 @Service
 public class ManageServiceImpl implements ManageService {
 
@@ -86,9 +87,9 @@ public class ManageServiceImpl implements ManageService {
     public String saveAttrInfo(BaseAttrInfo baseAttrInfo) {
 
         //判断baseAttrInfo是否为空，如果baseAttrInfo为空就直接返回，不在添加数据库
-        if (baseAttrInfo.getAttrName().length() == 0)
+        if (baseAttrInfo.getAttrName().length() == 0){
             return "error";
-
+        }
 
         //根据id判断是添加还是更新,对baseAttrInfo表的操作
         if (baseAttrInfo.getId() != null && baseAttrInfo.getId().length() > 0) {
@@ -120,8 +121,9 @@ public class ManageServiceImpl implements ManageService {
             for (BaseAttrValue attrValue : baseAttrValues) {
 
                 //判断属性值是否为空，如果为空就跳过本次循环
-                if (attrValue.getValueName().length() == 0)
+                if (attrValue.getValueName().length() == 0){
                     continue;
+                }
 
                 //设置主键为空，如果不设置数据库中的主键不会自增
                 attrValue.setId(null);
@@ -159,8 +161,9 @@ public class ManageServiceImpl implements ManageService {
     public String saveSpuInfo(SpuInfo spuInfo) {
 
         //先判断spuInfo是否为空
-        if (StringUtils.isEmpty(spuInfo.getSpuName()))
+        if (StringUtils.isEmpty(spuInfo.getSpuName())){
             return "error";
+        }
 
         //根据id判断是保存还是更新
         if (spuInfo.getId() != null && spuInfo.getId().length() > 0) {
@@ -331,14 +334,12 @@ public class ManageServiceImpl implements ManageService {
 
         //skuSaleAttrValue
         List<SkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
-        if (skuSaleAttrValueList!=null && skuSaleAttrValueList.size()>0){
+        if (skuSaleAttrValueList != null && skuSaleAttrValueList.size() > 0) {
             for (SkuSaleAttrValue skuSaleAttrValue : skuSaleAttrValueList) {
                 skuSaleAttrValue.setId(null);
                 skuSaleAttrValue.setSkuId(skuInfo.getId());
                 skuSaleAttrValueMapper.insertSelective(skuSaleAttrValue);
             }
         }
-
-
     }
 }
