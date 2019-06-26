@@ -29,7 +29,10 @@ public class GmallListServiceApplicationTests {
                 "    }\n" +
                 "  }\n" +
                 "}";
-        Search search = new Search.Builder(query).addIndex("movie_chn").addType("movie").build();
+        Search search = new Search.Builder(query)
+                                    .addIndex("movie_chn")
+                                    .addType("movie")
+                                    .build();
 
         SearchResult result = jestClient.execute(search);
 

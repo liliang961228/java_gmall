@@ -1,0 +1,4 @@
+com\liliang\gmall\gmallserviceutil\config\ActiveMQUtil.class
+com\liliang\gmall\gmallserviceutil\config\RedisUtil.class
+com\liliang\gmall\gmallserviceutil\config\ActiveMQConfig.class
+com\liliang\gmall\gmallserviceutil\config\RedisConfig.class

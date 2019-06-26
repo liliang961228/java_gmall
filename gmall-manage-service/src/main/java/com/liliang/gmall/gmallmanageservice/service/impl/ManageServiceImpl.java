@@ -4,8 +4,8 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.liliang.gmall.bean.*;
 import com.liliang.gmall.gmallmanageservice.mapper.*;
 import com.liliang.gmall.service.ManageService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -342,4 +342,15 @@ public class ManageServiceImpl implements ManageService {
             }
         }
     }
+
+    @Override
+    public List<BaseAttrInfo> getBaseAttrByValueIds(List<String> attrValueIdList) {
+
+        //把String集合转成字符串
+        //111,222,333
+        String join = StringUtils.join(attrValueIdList.toArray(), ",");
+        System.out.println("join==========="+join);
+        return baseAttrInfoMapper.selectBaseAttrInfoByValueIds(join);
+    }
+
 }

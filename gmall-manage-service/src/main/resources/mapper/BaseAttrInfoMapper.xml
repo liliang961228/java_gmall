@@ -12,6 +12,7 @@
         </collection>
     </resultMap>
 
+    <!--根据catalog3Id查询平台属性集合-->
     <select id="attrInfoListByCatalog3Id" resultMap="baseAttrInfo">
       SELECT
       bai.id,
@@ -24,5 +25,15 @@
         INNER JOIN base_attr_value bav
         ON bai.id = bav.attr_id
         WHERE bai.catalog3_id = #{catalog3Id}
+    </select>
+
+    <!--通过平台属性id，查询对应的平台属性-->
+    <select id="selectBaseAttrInfoByValueIds" resultMap="baseAttrInfo">
+        SELECT bai.id,bai.attr_name,bai.catalog3_id,
+        bav.id attr_value_name_id,bav.value_name,bav.attr_id
+        from base_attr_info bai
+        INNER JOIN base_attr_value bav
+        ON bai.id=bav.attr_id
+        WHERE bav.id in(${join})
     </select>
 </mapper>

@@ -1,0 +1,6 @@
+com\liliang\gmall\service\ManageService.class
+com\liliang\gmall\service\UserInfoService.class
+com\liliang\gmall\service\OrderService.class
+com\liliang\gmall\service\CartService.class
+com\liliang\gmall\service\ListService.class
+com\liliang\gmall\service\ItemService.class

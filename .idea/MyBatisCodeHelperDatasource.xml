@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="generatedClassPathList">
+          <list>
+            <option value="D:\SGGJava\java_gmall\gmall-bean\src\main\java\com\liliang\gmall\bean" />
+          </list>
+        </option>
+      </ProjectProfile>
+    </option>
+  </component>
+</project>

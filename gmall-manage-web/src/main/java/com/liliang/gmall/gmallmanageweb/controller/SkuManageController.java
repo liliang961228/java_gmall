@@ -4,7 +4,11 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.liliang.gmall.bean.SkuInfo;
 import com.liliang.gmall.bean.SpuImage;
 import com.liliang.gmall.bean.SpuSaleAttr;
+import com.liliang.gmall.bean.dto.SkuLsInfo;
+import com.liliang.gmall.service.ItemService;
+import com.liliang.gmall.service.ListService;
 import com.liliang.gmall.service.ManageService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +19,12 @@ public class SkuManageController {
 
     @Reference
     private ManageService manageService;
+
+    @Reference
+    private ListService listService;
+
+    @Reference
+    private ItemService itemService;
 
     //http://127.0.0.1:8082/spuSaleAttrList?spuId=61
     @RequestMapping("spuSaleAttrList")
@@ -34,6 +44,22 @@ public class SkuManageController {
     @RequestMapping("saveSkuInfo")
     public String saveSkuInfo(@RequestBody SkuInfo skuInfo){
         manageService.saveSkuInfo(skuInfo);
+        return "ok";
+    }
+
+    //TODO
+    // 商品上架：127.0.0.1:8082/onSale?skuId=33
+    @RequestMapping("onSale/{skuId}")
+    public String onSale(@PathVariable String skuId){
+
+        SkuLsInfo skuLsInfo = new SkuLsInfo();
+
+        SkuInfo skuInfo = itemService.getSkuInfoBySkuId(skuId);
+
+        BeanUtils.copyProperties(skuInfo,skuLsInfo);
+
+        listService.saveSkuLsInfo(skuLsInfo);
+
         return "ok";
     }
 

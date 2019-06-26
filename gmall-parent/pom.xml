@@ -133,6 +133,7 @@
                 <version>${mapper-starter.version}</version>
             </dependency>
 
+            <!--引入jedis包-->
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>

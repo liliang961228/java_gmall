@@ -3,15 +3,9 @@ package com.liliang.gmall.gmallmanageservice.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.liliang.gmall.bean.SkuImage;
-import com.liliang.gmall.bean.SkuInfo;
-import com.liliang.gmall.bean.SkuSaleAttrValue;
-import com.liliang.gmall.bean.SpuSaleAttr;
+import com.liliang.gmall.bean.*;
 import com.liliang.gmall.gmallmanageservice.constant.ItemConst;
-import com.liliang.gmall.gmallmanageservice.mapper.SkuImageMapper;
-import com.liliang.gmall.gmallmanageservice.mapper.SkuInfoMapper;
-import com.liliang.gmall.gmallmanageservice.mapper.SkuSaleAttrValueMapper;
-import com.liliang.gmall.gmallmanageservice.mapper.SpuSaleAttrMapper;
+import com.liliang.gmall.gmallmanageservice.mapper.*;
 import com.liliang.gmall.gmallserviceutil.config.RedisUtil;
 import com.liliang.gmall.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +36,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private RedisUtil redisUtil;
+
+    @Autowired
+    private SkuAttrValueMapper skuAttrValueMapper;
 
     /**
      * 从rides中查询到指定的数据，如果redis中没有指定的数据先从DB中查找，
@@ -123,7 +120,33 @@ public class ItemServiceImpl implements ItemService {
      * @return
      */
     public SkuInfo getSkuInfoBySkuIdBD(String skuId){
-        return skuInfoMapper.selectByPrimaryKey(skuId);
+
+        //通过skuId查询到指定的shuInfo数据
+        SkuInfo skuInfo = skuInfoMapper.selectByPrimaryKey(skuId);
+
+        //查询商品的图片信息，把图片信息放到redis中
+        List<SkuImage> skuImages = this.getSkuImageBySkuId(skuId);
+        skuInfo.setSkuImageList(skuImages);
+
+        //查询商品的属性值，把商品的属性值放到skuInfo中
+        List<SkuAttrValue> skuAttrValues = this.getSkuAttrValueBySkuId(skuId);
+        skuInfo.setSkuAttrValueList(skuAttrValues);
+
+        return skuInfo;
+
+    }
+
+    /**
+     * 通过skuId查询到指定的一组skuAttrValue的信息
+     * @param skuId
+     * @return
+     */
+    public List<SkuAttrValue> getSkuAttrValueBySkuId(String skuId){
+
+        SkuAttrValue skuAttrValue = new SkuAttrValue();
+        skuAttrValue.setSkuId(skuId);
+        List<SkuAttrValue> skuAttrValueList = skuAttrValueMapper.select(skuAttrValue);
+        return skuAttrValueList;
     }
 
     /**

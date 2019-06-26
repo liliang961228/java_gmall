@@ -1,0 +1,6 @@
+com\liliang\gmall\config\LoginRequire.class
+com\liliang\gmall\util\WebConst.class
+com\liliang\gmall\config\WebMvcConfiguration.class
+com\liliang\gmall\config\AuthInterceptor.class
+com\liliang\gmall\util\CookieUtil.class
+com\liliang\gmall\util\JwtUtil.class

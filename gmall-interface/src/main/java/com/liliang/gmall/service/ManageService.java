@@ -92,4 +92,12 @@ public interface ManageService {
      * @param skuInfo
      */
     void saveSkuInfo(SkuInfo skuInfo);
+
+
+    /**
+     * 通过平台属性id，查询对应的平台属性
+     * @param attrValueIdList
+     * @return
+     */
+    List<BaseAttrInfo> getBaseAttrByValueIds(List<String> attrValueIdList);
 }
